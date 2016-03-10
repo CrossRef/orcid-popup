@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <meta name="dc.identifier" content="10.1155/2013/938169">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="tooltip.js"></script>
+    <script src="orcidpopup.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://assets.crossref.org/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://assets.crossref.org/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://assets.crossref.org/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://assets.crossref.org/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://assets.crossref.org/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://assets.crossref.org/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://assets.crossref.org/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://assets.crossref.org/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://assets.crossref.org/favicon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://assets.crossref.org/favicon/manifest.json">
+    <link rel="mask-icon" href="https://assets.crossref.org/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="Crossref">
+    <meta name="application-name" content="Crossref">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="https://assets.crossref.org/favicon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+  <body>
+    <div class="navbar navbar-inverse">
+      <div class="container">
+	<div class="navbar-header">
+	  <a class="navbar-brand" href="#">
+	    <span>
+	       <img src="https://assets.crossref.org/logo/crossref-logo-landscape-200.png" alt="Crossref logo">
+	    </span>
+	  </a>
+	</div>
+	<ul class="nav navbar-nav navbar-right">
+	  <li>
+	    <a href="http://github.com/CrossRef/orcid-popup">
+	      Source on Github
+	    </a>
+	  </li>
+	</ul>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row" style="margin-top: 5em;">
+	<center>
+	  <h3>ORCID Popup</h3>
+	  <p class="lead" style="margin-top: 2em; margin-bottom: 3.5em;">
+	    Display other works from the same contributor *
+	  </p>
+	  <p style="margin-bottom: 6em;">
+	    <span>http://orcid.org/0000-0003-4060-8777</span>
+	    <a class="btn btn-primary btn-sm" id="orcid-link-explicit">ORCID</a>
+	  </p>
+	</center>
+	<small>* Where DOI, ORCID relations have been deposited with Crossref.</small>
+	<hr>
+      </div>
+
+      <div class="row">
+        <h3>Try it</h3>
+
+	<p>Generate an ORCID popup for any ORCID. Try it out with the form below:</p>
+
+	<form class="form-inline">
+	  <input style="width: 30em;" class="form-control" id="orcid-try-orcid" type="text" placeholder="http://orcid.org/0000-0003-4060-8777"></input>
+	  <a id="orcid-try" class="form-control btn btn-success">Create Popup</a>
+	</form>
+
+	<div class="well"><center id="orcid-try-gen"></center></div>
+
+	<script type="text/javascript">
+	  $(document).ready(function() {
+	    $('#orcid-try').on('click', function() {
+	      var val = $('#orcid-try-orcid').val();
+	      if (val) {
+	          $('#orcid-try-gen').html('<span>' + val + ' </span><a class="btn btn-primary" id="orcid-try-popup">ORCID</a>');
+	          $('#orcid-try-popup').orcidPopup({orcid: val});
+	      }
+	    });
+	  });
+	</script>
+
+	<h3>Using the plugin</h3>
+
+	<p>
+	  The ORCID popup is a jQuery plugin compatible with Bootstrap. In fact, the plugin extends Bootstrap's
+	  <code>tooltip.js</code>, so if you don't currently include Bootstrap in your site, you will need to include <code>tooltip.js</code>
+	  and some CSS. If you want to style the popup yourself, you can exclude the premade CSS.
+	</p>
+
+	<p>Required bits:</p>
+
+	<ol>
+	  <li>jQuery. If you don't already, include jQuery on your page.</li>
+	  <li><code>tooltip.js</code>. Include this if you don't have the Bootstrap javascript.</li>
+	  <li><code>orcidpopup.js</code>. Javascript for the popup plugin itself.</li>
+	  <li>CSS. You'll need bootstrap CSS and also <code>orcidpopup.css</code> if you want the plugin
+	    to look like it does on this site.</li>
+	  <li>Images from the <code>img</code> directory. Put these wherever you like - their location
+	    can be specified as an option.</li>
+	</ol>
+
+	<p>Now you can create the popup, passing in an ORCID:</p>
+
+	<pre>$('#my-orcid-popup-button').orcidPopup({orcid: 'http://orcid.org/1234-1234-1234-1234'});</pre>
+	  
+	<h4>Specifying Custom Options</h4>
+
+	<p>The plugin's behaviour can be customised by passing additional options to the <code>orcidPopup</code>
+	  method. For example, set a custom image path, and custom content type labels:</p>
+
+	<pre>$('#my-orcid-popup-buttom').orcidPopup({
+  imageLocation: '//cdn.mydomain.com/orcidpopup/img',
+  contentTypeLabels: {'application/vnd.me.custom-xml+xml': 'Custom XML'}
+});</pre>
+
+	<h4>Options List</h4>
+
+	<table class="table table-striped">
+	  <tr>
+	    <th>Option</th>
+	    <th>Type</th>
+	    <th>Description</th>
+	  </tr>
+	  <tr>
+	    <td>orcid</td>
+	    <td>String</td>
+	    <td>ORCID to display in the popup. Required.</td>
+	  </tr>
+	  <tr>
+	    <td>contentTypeLabels</td>
+	    <td>Map</td>
+	    <td>Map of content types (MIME types) to friendly labels. Optional.</td>
+	  </tr>
+	</table>
+
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        $('#orcid-link-explicit').orcidPopup({orcid: 'http://orcid.org/0000-0003-4060-8777'});
+      });
+    </script>
+    
+  </body>
+</html>
